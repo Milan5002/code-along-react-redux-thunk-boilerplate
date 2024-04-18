@@ -1,13 +1,8 @@
-import { FETCH_DATA } from "./actiontype"
+import { legacy_createStore as createStore } from "redux";
+import { reducer } from "./reducer";
+import { applyMiddleware } from "redux";
+import logger from "redux-logger";
+import { thunk } from "redux-thunk";
 
-const intialState = {
-    user : []
-}
-export const reducer = (storeData=intialState,action)=>{
-    if(action.type=FETCH_DATA){
-        return {
-            user : action.payload
-        }
-    }
-    return storeData
-}
+
+export const Store = createStore(reducer,applyMiddleware(logger,thunk));
